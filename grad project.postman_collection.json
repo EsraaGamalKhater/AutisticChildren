@@ -1,0 +1,707 @@
+{
+	"info": {
+		"_postman_id": "1af6a5d7-d953-4b14-809f-86f0c77b8b66",
+		"name": "grad project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27864674"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"userName\":\"esraa\"  ,\r\n  \"email\":\"esraagamal12002@gmail.com\",\r\n    \"password\":\"455\",\r\n    \"confirmPassword\":\"455\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzcmFhZ2FtYWxraGF0ZXIxMjAwMkBnbWFpbC5jb20iLCJfaWQiOiI2NWRhNDQ2ZTBhM2RkODE1NWU1OGY4Y2EiLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDg4OTU1MDYsImV4cCI6MTcwODg5OTEwNn0.i-xJGFPHYCPx1cJPPmpjFx-43qAPsMGHTf-pKJdgAiY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \"email\":\"esraagamal12002@gmail.com\",\r\n    \"password\":\"455\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login ",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login "
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forget",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzcmFAZ21haWwuY29tIiwiX2lkIjoiNjVjYzIyOGJlNGNjYmRiYzZhMjk3YWE3Iiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3MDc4ODUxMzIsImV4cCI6MTcwNzg4ODczMn0.9MbB0u47CStboNwOwdXIbsKf0jJymA7Qx5BHwFpNLqU",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"email\":\"esraagamal12002@gmail.com\"\r\n  \r\n   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/forget",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"forget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzcmFAZ21haWwuY29tIiwiX2lkIjoiNjVjYzIyOGJlNGNjYmRiYzZhMjk3YWE3Iiwicm9sZSI6IlVzZXIiLCJpYXQiOjE3MDc4ODUxMzIsImV4cCI6MTcwNzg4ODczMn0.9MbB0u47CStboNwOwdXIbsKf0jJymA7Qx5BHwFpNLqU",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n     \"email\":\"esraagamal12002@gmail.com\",\r\n      \"forgetCode\":\"6572\",\r\n     \"newPassword\":\"345\",\r\n     \"confirmpassword\":\"345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "blog",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "e_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjkyMjZhZDZlODQ2MjZjYmUzZjhkOCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcxNDIzMjQxOCwiZXhwIjoxNzE2ODI0NDE4fQ.aYghdRjw3SE1MC_GbHk9MI0O3oZ3Kn7r1TeU-u-s1o8",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ESRAA/OneDrive/Pictures/11.jpg",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "saddd",
+									"type": "text"
+								},
+								{
+									"key": "selectedActivity",
+									"value": "Quiz Time",
+									"type": "text"
+								},
+								{
+									"key": "daysOfWeek",
+									"value": "Saturday",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2024-04-17",
+									"type": "text"
+								},
+								{
+									"key": "reminder",
+									"value": "On Time",
+									"type": "text"
+								},
+								{
+									"key": "daysOfWeek",
+									"value": "Wednesday",
+									"type": "text"
+								},
+								{
+									"key": "time",
+									"value": "6:49PM",
+									"type": "text"
+								},
+								{
+									"key": "repeater",
+									"value": "weekly",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/blog/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"add"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "e_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjkyMjZhZDZlODQ2MjZjYmUzZjhkOCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcxNDIzMjQxOCwiZXhwIjoxNzE2ODI0NDE4fQ.aYghdRjw3SE1MC_GbHk9MI0O3oZ3Kn7r1TeU-u-s1o8",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ESRAA/OneDrive/Pictures/FB_IMG_1694105813110.jpg"
+								},
+								{
+									"key": "title",
+									"value": "saddd",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "selectedActivity",
+									"value": "Quiz Time",
+									"type": "text"
+								},
+								{
+									"key": "daysOfWeek",
+									"value": "Saturday",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "2024-03-20",
+									"type": "text"
+								},
+								{
+									"key": "reminder",
+									"value": "2024-03-20T05:19:00",
+									"type": "text"
+								},
+								{
+									"key": "daysOfWeek",
+									"value": "Sunday",
+									"type": "text"
+								},
+								{
+									"key": "time",
+									"value": "7:55 AM",
+									"type": "text"
+								},
+								{
+									"key": "repeater",
+									"value": "weekly",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/blog/updateBlog/663254e0636a417f217332f8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"updateBlog",
+								"663254e0636a417f217332f8"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "e_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MjkyMjZhZDZlODQ2MjZjYmUzZjhkOCIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTcxNDIzMjQxOCwiZXhwIjoxNzE2ODI0NDE4fQ.aYghdRjw3SE1MC_GbHk9MI0O3oZ3Kn7r1TeU-u-s1o8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/blog/deleteBlog/661ea34327f19d0f176433ff",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"deleteBlog",
+								"661ea34327f19d0f176433ff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/blog/createdBy/6618d1a87856cd6fdf1f84c2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"createdBy",
+								"6618d1a87856cd6fdf1f84c2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTodos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/blog/getTodos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"blog",
+								"getTodos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "changePassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzcmFhZ2FtYWxraGF0ZXIxMjAwMkBnbWFpbC5jb20iLCJfaWQiOiI2NWRhNDQ2ZTBhM2RkODE1NWU1OGY4Y2EiLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDg4OTU1MDYsImV4cCI6MTcwODg5OTEwNn0.i-xJGFPHYCPx1cJPPmpjFx-43qAPsMGHTf-pKJdgAiY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{      \"oldPassword\":\"1455\",\r\n    \"newPassword\":\"11455\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/changePassword/66215f64baa3d82a97050c7f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"changePassword",
+								"66215f64baa3d82a97050c7f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzcmFhZ2FtYWxraGF0ZXIxMjAwMkBnbWFpbC5jb20iLCJfaWQiOiI2NWRhNDQ2ZTBhM2RkODE1NWU1OGY4Y2EiLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDg4OTU1MDYsImV4cCI6MTcwODg5OTEwNn0.i-xJGFPHYCPx1cJPPmpjFx-43qAPsMGHTf-pKJdgAiY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": \"6618d1a87856cd6fdf1f84c2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editProfile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzcmFhZ2FtYWxraGF0ZXIxMjAwMkBnbWFpbC5jb20iLCJfaWQiOiI2NWRhNDQ2ZTBhM2RkODE1NWU1OGY4Y2EiLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDg4OTU1MDYsImV4cCI6MTcwODg5OTEwNn0.i-xJGFPHYCPx1cJPPmpjFx-43qAPsMGHTf-pKJdgAiY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"userName\":\"esraa\",\r\n\"email\":\"esraagamalKhater12002@gmail.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/editProfile/66215f64baa3d82a97050c7f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"editProfile",
+								"66215f64baa3d82a97050c7f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateprofilepic",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzcmFhZ2FtYWxraGF0ZXIxMjAwMkBnbWFpbC5jb20iLCJfaWQiOiI2NWRhNDQ2ZTBhM2RkODE1NWU1OGY4Y2EiLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDg4OTU1MDYsImV4cCI6MTcwODg5OTEwNn0.i-xJGFPHYCPx1cJPPmpjFx-43qAPsMGHTf-pKJdgAiY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/ESRAA/OneDrive/Pictures/11.jpg"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/updateprofilepic/66215f64baa3d82a97050c7f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"updateprofilepic",
+								"66215f64baa3d82a97050c7f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profilepic",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVzcmFhZ2FtYWxraGF0ZXIxMjAwMkBnbWFpbC5jb20iLCJfaWQiOiI2NWRhNDQ2ZTBhM2RkODE1NWU1OGY4Y2EiLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDg4OTU1MDYsImV4cCI6MTcwODg5OTEwNn0.i-xJGFPHYCPx1cJPPmpjFx-43qAPsMGHTf-pKJdgAiY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eed8ea5-dd91-4a00-95b5-31d7a9a56370"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/profilepic/66215f64baa3d82a97050c7f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"profilepic",
+								"66215f64baa3d82a97050c7f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/deleteUser/66215f64baa3d82a97050c7f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"deleteUser",
+								"66215f64baa3d82a97050c7f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getuserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/getuserById/662a86e6f0363e2adf9db2a1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"getuserById",
+								"662a86e6f0363e2adf9db2a1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
