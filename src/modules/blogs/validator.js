@@ -29,8 +29,8 @@ export const addBlogSchema = (req) => {
             "any.required": i18n.__({ phrase: "time is required", locale: lang })
         }),
         daysOfWeek: Joi.alternatives().try(
-            Joi.string().valid('Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'All day'),
-            Joi.array().items(Joi.string().valid('Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'All day'))
+            Joi.string().valid('Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'All day',"السبت", "الأحد","الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "كل الايام"),
+            Joi.array().items(Joi.string().valid('Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'All day',"السبت", "الأحد","الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "كل الايام"))
         ).required().messages({
             "any.required": i18n.__({ phrase: "day is required", locale: lang })
         }),

@@ -71,6 +71,7 @@
 "date is required": "التاريخ مطلوب",
 "Reminder is required": "التذكير مطلوب",
 "repeater is required": "التكرار مطلوب",
+"reminder is required":" مطلوب التذكير",
 "time is required": "الوقت مطلوب",
 "day is required": "اليوم مطلوب",
 "Quiz Time": "وقت الاختبار",
@@ -80,7 +81,11 @@
 "Play Time": "وقت اللعب",
 "Watch TV": "مشاهدة التلفاز",
 "Teeth Brushing": "تنظيف الأسنان",
-"Sleep Time": "وقت النوم"
+"Sleep Time": "وقت النوم",
+"Task not found":"لم يتم العثور على المهمة"
+ 
+  
+
 
 }
 

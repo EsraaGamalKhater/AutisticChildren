@@ -4,7 +4,7 @@ const blogschema = new mongoose.Schema({
     title: String,
     daysOfWeek:{
         type: [String],
-        enum: ['Saturday','Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+        enum: ['Saturday','Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',"السبت", "الأحد","الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "كل الايام"]
     },
     
     image: {
