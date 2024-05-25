@@ -7,9 +7,6 @@ export async function sendEmailService({
   attachments = [],
 } = {}) {
   const transporter = nodemailer.createTransport({
-    host: 'localhost',
-    port: 587,
-    secure: false,
     service: 'gmail',
     auth: {
       user: process.env.EMAIL,
