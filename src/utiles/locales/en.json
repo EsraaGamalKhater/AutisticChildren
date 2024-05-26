@@ -75,5 +75,6 @@
     "time is required": "Time is required",
     "day is required": "Day is required",
       "internal_server_error": "Internal Server Error",
-      "Task not found":"Task not found"
+      "Task not found":"Task not found",
+      "Task updated successfully":"Task updated successfully"
 }
