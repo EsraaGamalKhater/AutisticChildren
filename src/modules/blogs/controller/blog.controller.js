@@ -208,7 +208,13 @@ export const updateBlog = async (req, res) => {
     // Find the selected todo item
     const selectedTodo = selectedActivity ? todos.find(todo => todo.title === selectedActivity) : null;
 
-    let image = null;
+    const existingBlog = await blogmodel.findById(id);
+    if (!existingBlog) {
+        return res.status(404).json({ cause: 404, message: req.translate('Task not found') });
+    }
+
+    // Handle image
+    let image = existingBlog.image;
 
     if (selectedTodo && selectedTodo.autoAdd) {
         // Add the predefined image if autoAdd is true
@@ -220,19 +226,23 @@ export const updateBlog = async (req, res) => {
     }
 
     // Use Moment.js to parse and format the time if provided
-    let formattedTime = null;
+
+    let formattedTime = existingBlog.time;
     if (time) {
         const parsedTime = moment(time, 'h:mm a');
-        formattedTime = parsedTime.isValid() ? parsedTime.format('h:mm A') : null }
+        if (parsedTime.isValid()) {
+            formattedTime = parsedTime.format('h:mm A');
+        }
+    }
 
         // Find the blog entry by ID and update it
         const updatedData = {
             title: title || selectedActivity || 'Untitled',
             daysOfWeek: req.body.daysOfWeek,
             date: req.body.date,
-            time: formattedTime || null, // Add the time to the entry
-            reminder: reminder || null, // Add the reminder to the entry
-            repeater: repeater || null,
+            time: formattedTime,
+            reminder: reminder,
+            repeater: repeater,
             image: image,
         };
     
@@ -243,8 +253,8 @@ export const updateBlog = async (req, res) => {
         }
     
         // Check if alarm time is provided by the user
-        const alarmTime = formattedTime ? moment(formattedTime, 'h:mm A').toDate() : null;
-        let alarmDate;
+        const alarmTime = moment(formattedTime, 'h:mm A').toDate();
+        let alarmDate
     
         // Determine the alarm date based on the reminder option
         switch (reminder) {
