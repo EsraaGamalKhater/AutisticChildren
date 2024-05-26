@@ -26,8 +26,14 @@ const userSchema = new Schema(
       enum :['User', 'Admin']
     },
     profile_pic: {
-      secure_url: String,
-      public_id: String,
+      secure_url:{
+        type: String,
+        default:"https://res.cloudinary.com/dlge2bvzk/image/upload/v1716728218/uceiwc9tlkgrobwspcsk.jpg"
+      },
+      public_id:{
+        type: String,
+        default:"uceiwc9tlkgrobwspcsk"
+      },
     },
     token: String,
     forgetCode: String,
