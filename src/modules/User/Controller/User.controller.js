@@ -23,13 +23,24 @@ export const profilepic = async (req, res) => {
 export const editProfile = async (req, res, next) => {
     const { id } = req.params;
     const { userName, email } = req.body;
-    const user = await userModel.findByIdAndUpdate({ _id: id }, { userName, email }, { new: true })
-    if (!user) {
-        return res.status(404).json({ cause: 404, message: req.translate('User not found' )});
-    }
-    res.status(200).json({ message: req.translate('Profile updated successfully'), user });
 
-}
+    // Fetch the existing user
+    const existingUser = await userModel.findById(id);
+    if (!existingUser) {
+        return res.status(404).json({ cause: 404, message: req.translate('User not found') });
+    }
+
+    // Update the user entry, ensuring empty values do not overwrite existing ones
+    const updatedData = {
+        userName: userName && userName.trim() !== '' ? userName : existingUser.userName,
+        email: email && email.trim() !== '' ? email : existingUser.email,
+    };
+
+    // Update the user in the database
+    const updatedUser = await userModel.findByIdAndUpdate(id, updatedData, { new: true });
+
+    res.status(200).json({ message: req.translate('Profile updated successfully'), user: updatedUser });
+};
 ////////////updateprofilepic///////////////////
 export const updateprofilepic = async (req, res) => {
     const { _id } = req.params;

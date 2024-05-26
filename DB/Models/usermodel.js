@@ -28,11 +28,11 @@ const userSchema = new Schema(
     profile_pic: {
       secure_url:{
         type: String,
-        default:"https://res.cloudinary.com/dlge2bvzk/image/upload/v1716728218/uceiwc9tlkgrobwspcsk.jpg"
+        default:"https://res.cloudinary.com/dlge2bvzk/image/upload/v1716742492/f9diacfqagg7spe8ba0x.png"
       },
       public_id:{
         type: String,
-        default:"uceiwc9tlkgrobwspcsk"
+        default:"f9diacfqagg7spe8ba0x"
       },
     },
     token: String,

@@ -188,103 +188,6 @@ const scheduleSixMonthRepeater = (alarmDate) => {
         scheduleSixMonthRepeater(nextAlarmDate);
     });
 };
-
-/////////////////updateBlog///////////////////
-export const updateBlog = async (req, res) => {
-    const { id } = req.params;
-    const { title, selectedActivity, time, reminder, repeater } = req.body;
-
-    // Check if either title or selectedActivity is provided
-    if (!(title || selectedActivity)) {
-        return res.status(400).json({ cause: 400, message: req.translate('Please provide either title and category') });
-    }
-
-    // Check the validity of the selected activity
-    const validActivities = todos.map(todo => todo.title);
-    if (selectedActivity && !validActivities.includes(selectedActivity)) {
-        return res.status(400).json({ cause: 400, message: req.translate('Invalid category') });
-    }
-
-    // Find the selected todo item
-    const selectedTodo = selectedActivity ? todos.find(todo => todo.title === selectedActivity) : null;
-
-    const existingBlog = await blogmodel.findById(id);
-    if (!existingBlog) {
-        return res.status(404).json({ cause: 404, message: req.translate('Task not found') });
-    }
-
-    // Handle image
-    let image = existingBlog.image;
-
-    if (selectedTodo && selectedTodo.autoAdd) {
-        // Add the predefined image if autoAdd is true
-        image = { id: selectedTodo.autoImage, url: selectedTodo.autoImage };
-    } else if (req.file) {
-        const { secure_url, public_id } = await cloudinary.uploader.upload(req.file.path);
-        // Assign image details to the image object
-        image = { id: public_id, url: secure_url };
-    }
-
-    // Use Moment.js to parse and format the time if provided
-
-    let formattedTime = existingBlog.time;
-    if (time) {
-        const parsedTime = moment(time, 'h:mm a');
-        if (parsedTime.isValid()) {
-            formattedTime = parsedTime.format('h:mm A');
-        }
-    }
-
-        // Find the blog entry by ID and update it
-        const updatedData = {
-            title: title || selectedActivity || 'Untitled',
-            daysOfWeek: req.body.daysOfWeek,
-            date: req.body.date,
-            time: formattedTime,
-            reminder: reminder,
-            repeater: repeater,
-            image: image,
-        };
-    
-        const updated = await blogmodel.findByIdAndUpdate(id, updatedData, { new: true });
-    
-        if (!updated) {
-            return res.status(404).json({ cause: 404, message: req.translate('Task not found') });
-        }
-    
-        // Check if alarm time is provided by the user
-        const alarmTime = moment(formattedTime, 'h:mm A').toDate();
-        let alarmDate
-    
-        // Determine the alarm date based on the reminder option
-        switch (reminder) {
-            case 'On Time':
-                alarmDate = new Date(alarmTime);
-                break;
-            case '5 minutes before':
-                alarmDate = alarmTime ? moment(alarmTime).subtract(5, 'minutes').toDate() : null;
-                break;
-            case '15 minutes before':
-                alarmDate = alarmTime ? moment(alarmTime).subtract(15, 'minutes').toDate() : null;
-                break;
-            case '30 minutes before':
-                alarmDate = alarmTime ? moment(alarmTime).subtract(30, 'minutes').toDate() : null;
-                break;
-            default:
-                alarmDate = null;
-        }
-    
-        // Schedule an alarm if a valid alarm date is determined
-        if (alarmDate && !isNaN(alarmDate.getTime())) {
-            schedule.scheduleJob(alarmDate, async () => {
-                console.log(`Alarm triggered for task: ${updated.title}`);
-            });
-        }
-    
-        return res.status(200).json({ message: req.translate('Task updated successfully'), updated });
-    };
-
-
 ////////////////deleteBlog///////////
 export const deleteBlog = async (req, res) => {
     let { id } = req.params;
@@ -307,5 +210,95 @@ export const getBlogById = async (req, res) => {
 
 
 
+
+/////////////////updateBlog///////////////////
+export const updateBlog = async (req, res) => {
+    const { id } = req.params;
+    const { title, selectedActivity, time, reminder, repeater, daysOfWeek, date } = req.body;
+
+    // Check the validity of the selected activity if provided
+    const validActivities = todos.map(todo => todo.title);
+    if (selectedActivity && !validActivities.includes(selectedActivity)) {
+        return res.status(400).json({ cause: 400, message: req.translate('Invalid category') });
+    }
+
+    // Find the selected todo item if provided
+    const selectedTodo = selectedActivity ? todos.find(todo => todo.title === selectedActivity) : null;
+
+    const existingBlog = await blogmodel.findById(id);
+    if (!existingBlog) {
+        return res.status(404).json({ cause: 404, message: req.translate('Task not found') });
+    }
+
+    // Handle image
+    let image = existingBlog.image;
+
+    if (selectedTodo && selectedTodo.autoAdd) {
+        // Add the predefined image if autoAdd is true
+        image = { id: selectedTodo.autoImage, url: selectedTodo.autoImage };
+    } else if (req.file) {
+        const { secure_url, public_id } = await cloudinary.uploader.upload(req.file.path);
+        // Assign image details to the image object
+        image = { id: public_id, url: secure_url };
+    }
+
+    // Use Moment.js to parse and format the time if provided
+    let formattedTime = existingBlog.time;
+    if (time) {
+        const parsedTime = moment(time, 'h:mm a');
+        if (parsedTime.isValid()) {
+            formattedTime = parsedTime.format('h:mm A');
+        }
+    }
+
+    // Update the blog entry, ensuring null, undefined or empty values do not overwrite existing ones
+    const updatedData = {
+        title: title ? title : existingBlog.title,
+        selectedActivity: selectedActivity ? selectedActivity : existingBlog.selectedActivity,
+        daysOfWeek: Array.isArray(daysOfWeek) && daysOfWeek.length ? daysOfWeek : existingBlog.daysOfWeek,
+        date: date ? date : existingBlog.date,
+        time: formattedTime ? formattedTime : existingBlog.time,
+        reminder: reminder ? reminder : existingBlog.reminder,
+        repeater: repeater ? repeater : existingBlog.repeater,
+        image: image,
+    };
+
+    const updated = await blogmodel.findByIdAndUpdate(id, updatedData, { new: true });
+
+    if (!updated) {
+        return res.status(404).json({ cause: 404, message: req.translate('Task not found') });
+    }
+
+    // Check if alarm time is provided by the user
+    const alarmTime = formattedTime ? moment(formattedTime, 'h:mm A').toDate() : null;
+    let alarmDate;
+
+    // Determine the alarm date based on the reminder option
+    switch (reminder) {
+        case 'On Time':
+            alarmDate = new Date(alarmTime);
+            break;
+        case '5 minutes before':
+            alarmDate = alarmTime ? moment(alarmTime).subtract(5, 'minutes').toDate() : null;
+            break;
+        case '15 minutes before':
+            alarmDate = alarmTime ? moment(alarmTime).subtract(15, 'minutes').toDate() : null;
+            break;
+        case '30 minutes before':
+            alarmDate = alarmTime ? moment(alarmTime).subtract(30, 'minutes').toDate() : null;
+            break;
+        default:
+            alarmDate = null;
+    }
+
+    // Schedule an alarm if a valid alarm date is determined
+    if (alarmDate && !isNaN(alarmDate.getTime())) {
+        schedule.scheduleJob(alarmDate, async () => {
+            console.log(`Alarm triggered for task: ${updated.title}`);
+        });
+    }
+
+    return res.status(200).json({ message: req.translate('Task updated successfully'), updated });
+};
 
 
