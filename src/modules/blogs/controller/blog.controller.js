@@ -59,13 +59,6 @@ export const addBlog = async (req, res) => {
     if (!(title || selectedActivity)) {
         return res.status(400).json({ cause: 400, message: req.translate('Please provide either title and category') });
     }
-
-    const validActivities = todos.map(todo => todo.title);
-    // Check if selectedActivity is valid
-    if (selectedActivity && !validActivities.includes(selectedActivity)) {
-        return res.status(400).json({ cause: 400, message: req.translate('Invalid category' )});
-    }
-
     // Find the selected todo item
     const selectedTodo = selectedActivity ? todos.find(todo => todo.title === selectedActivity) : null;
 
@@ -215,12 +208,8 @@ export const getBlogById = async (req, res) => {
 export const updateBlog = async (req, res) => {
     const { id } = req.params;
     const { title, selectedActivity, time, reminder, repeater, daysOfWeek, date } = req.body;
-
-    // Check the validity of the selected activity if provided
     const validActivities = todos.map(todo => todo.title);
-    if (selectedActivity && !validActivities.includes(selectedActivity)) {
-        return res.status(400).json({ cause: 400, message: req.translate('Invalid category') });
-    }
+   
 
     // Find the selected todo item if provided
     const selectedTodo = selectedActivity ? todos.find(todo => todo.title === selectedActivity) : null;
